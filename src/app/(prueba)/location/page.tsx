@@ -6,9 +6,11 @@ import MapboxMap from "@/components/mapbox-map";
 import mapboxgl from "mapbox-gl";
 import MapLoadingHolder from "@/components/map-loading-holder";
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import { getMatchedRoute } from '@/utils/map-box/mapMatching';
+import mapbox from "@/utils/map-wrapper";
+
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import mapbox from "@/utils/map-wrapper";
 
 const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
@@ -38,8 +40,12 @@ export default function Home() {
         zoom,
     } = viewport;
 
-    const onMapCreated = useCallback((map: mapboxgl.Map) => {
-        mapbox.map = map;
+
+
+
+
+    const onMapCreated = useCallback((mapInstance: mapboxgl.Map) => {
+        mapbox.map = mapInstance;
 
         mapbox.map.on("move", () => {
             setViewport({
@@ -66,32 +72,86 @@ export default function Home() {
 
     }, []);
 
+    const onCreatedMapDraw = useCallback((drawInstance: MapboxDraw, mapInstance: mapboxgl.Map) => {
+        // Load saved points from localStorage
+        const savedPoints = localStorage.getItem('savedPoints');
+        if (savedPoints) {
+            const parsedPoints = JSON.parse(savedPoints);
+            drawInstance.add(parsedPoints);
+            drawRoute(parsedPoints.geometry.coordinates, mapInstance);
+        }
+
+        mapbox.map.on('draw.create', async (e) => {
+            handleDrawCreate(e, mapInstance)
+        });
+    }, [])
+
+    const handleDrawCreate = async (e: any, mapInstance: mapboxgl.Map) => {
+        const coordinates = e.features[0].geometry.coordinates;
+        await drawRoute(coordinates, mapInstance!);
+
+        // Save points to localStorage
+        localStorage.setItem('savedPoints', JSON.stringify(e.features[0]));
+    };
+
+    const drawRoute = async (coordinates: number[][], mapInstance: mapboxgl.Map) => {
+        const matchedRoute = await getMatchedRoute(coordinates);
+
+        if (matchedRoute && matchedRoute.matchings && matchedRoute.matchings[0]) {
+            const route = matchedRoute.matchings[0].geometry;
+            console.log("route ===> " + JSON.stringify(route))
+
+            // if (mapInstance.getSource('route') != undefined) {
+            //     (mapInstance.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
+            // } else {
+            mapInstance.addLayer({
+                id: 'route',
+                type: 'line',
+                source: {
+                    type: 'geojson',
+                    data: route
+                },
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#1DB954',
+                    'line-width': 4
+                }
+            });
+            // }
+        }
+    };
+
+
+
     const onMapCreatedDirections = useCallback((mapDirections: MapboxDirections) => {
         mapDirections.on('route', (e: any) => {
             const coords = e.route[0].geometry.coordinates.map((coord: [number, number]) => new mapboxgl.LngLat(coord[0], coord[1]));
             setRouteCoords(coords);
-          });
+        });
 
-          setDirections(mapDirections);
+        setDirections(mapDirections);
     }, []);
 
     const simulateRoute = () => {
         if (!routeCoords.length) return;
-    
+
         let index = 0;
         const marker = new mapboxgl.Marker().setLngLat(routeCoords[0]).addTo(map);
-    
+
         const moveMarker = () => {
-          if (index < routeCoords.length) {
-            marker.setLngLat(routeCoords[index]);
-            index++;
-            requestAnimationFrame(moveMarker);
-          }
+            if (index < routeCoords.length) {
+                marker.setLngLat(routeCoords[index]);
+                index++;
+                requestAnimationFrame(moveMarker);
+            }
         };
-    
+
         setIsSimulating(true);
         moveMarker();
-      };
+    };
 
 
     return (
@@ -100,11 +160,19 @@ export default function Home() {
                 <div className="viewport-panel">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
                 </div>
+                <div className="info-box">
+                    <p>
+                        Draw your route using the draw tools on the right. To get the most accurate
+                        route match, draw points at regular intervals.
+                    </p>
+                    <div id="directions"></div>
+                </div>
                 <MapboxMap
                     //initialOptions={{ center: [38.0983, 55.7038] }}
                     onLoaded={handleMapLoading}
                     onCreated={onMapCreated}
-                    onCreatedDirections={onMapCreatedDirections}
+                    onCreatedMapDraw={onCreatedMapDraw}
+                    //onCreatedDirections={onMapCreatedDirections}
                     initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
                 />
             </div>
