@@ -54,7 +54,7 @@ body,
   position: relative;
 }
 
-.map-wrapper,
+/* .map-wrapper,
 .loading-holder {
   position: absolute;
   height: 100%;
@@ -63,19 +63,11 @@ body,
   left: 0;
   bottom: 0;
   right: 0;
-}
-
+  z-index: 5;
+} */
+/* 
 .loading-holder {
-  background: -webkit-linear-gradient(45deg,
-      rgba(152, 207, 195, 0.7),
-      rgb(86, 181, 184));
-  background: -moz-linear-gradient(45deg,
-      rgba(152, 207, 195, 0.7),
-      rgb(86, 181, 184));
-  background: linear-gradient(45deg,
-      rgba(152, 207, 195, 0.7),
-      rgb(86, 181, 184),
-      0.9);
+  background-color: #fff;
 
   display: flex;
   justify-content: center;
@@ -92,7 +84,7 @@ body,
 .loading-holder h1 {
   margin-top: 4rem;
   text-shadow: 0px 0px 10px rgba(152, 207, 195, 0.7);
-}
+} */
 
 @keyframes pulse {
   0% {
@@ -116,7 +108,7 @@ body,
   z-index: 1;
   position: absolute;
   top: 0;
-  right:  0;
+  right: 0;
   margin: 12px;
   border-radius: 4px;
   font-size: 1.2rem;
@@ -132,12 +124,15 @@ body,
 /* Estilo CSS para los marcadores */
 .marker {
   background-image: url(../../public/image/marker.png);
+  /* background-image: url(../../public/icons/whereabout.svg); */
   background-size: cover;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
 }
+
+.marker.fill-red {}
 
 .info-box {
   position: absolute;
@@ -212,4 +207,119 @@ LAYOUT PARA MAPS
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+
+/*******************/
+.sidebar {
+  position: absolute;
+  width: 350px;
+  height: 100%;
+  top: 0;
+  left: 60px;
+  overflow: hidden;
+  border-right: 1px solid rgb(0 0 0 / 25%);
+  background: white;
+  z-index: 3;
+}
+
+.heading {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  min-height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+}
+
+.listings {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.listings .item {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child {
+  border-bottom: none;
+}
+
+.listings .item .title {
+  display: block;
+  color: #00853e;
+  font-weight: 700;
+}
+
+.listings .item .title small {
+  font-weight: 400;
+}
+
+.listings .item.active .title,
+.listings .item .title:hover {
+  color: #8cc63f;
+}
+
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0 0 0 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00853e;
+  border-radius: 0;
+}
+
+/* Marker tweaks */
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  font:
+    400 15px/22px 'Source Sans Pro',
+    'Helvetica Neue',
+    sans-serif;
+  padding: 0 !important;
+  width: 180px;
+}
+
+.mapboxgl-popup-content h3 {
+  background: #91c949;
+  color: #fff;
+  margin: 0;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.mapboxgl-popup-content div {
+  padding: 10px;
+}
+
+.mapboxgl-popup-anchor-top>.mapboxgl-popup-content {
+  margin-top: 15px;
+}
+
+.mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
+  border-bottom-color: #91c949;
 }

@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import classes from "@/app/(prueba)/location/Page.module.css";
 import MapboxMap from "@/components/mapbox-map";
 import mapboxgl from "mapbox-gl";
-import MapLoadingHolder from "@/components/map-loading-holder";
+import MapLoadingHolder from "@/components/loading/map-loading-holder";
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { getMatchedRoute } from '@/utils/map-box/mapMatching';
 import mapbox from "@/utils/map-wrapper";
@@ -135,50 +135,29 @@ export default function Home() {
         setDirections(mapDirections);
     }, []);
 
-    const simulateRoute = () => {
-        if (!routeCoords.length) return;
-
-        let index = 0;
-        const marker = new mapboxgl.Marker().setLngLat(routeCoords[0]).addTo(map);
-
-        const moveMarker = () => {
-            if (index < routeCoords.length) {
-                marker.setLngLat(routeCoords[index]);
-                index++;
-                requestAnimationFrame(moveMarker);
-            }
-        };
-
-        setIsSimulating(true);
-        moveMarker();
-    };
-
 
     return (
-        <main className={classes.mainStyle}>
-            <div className="map-wrapper">
+        <main className="fullscreen">
+            {/* <div className="map-wrapper">
                 <div className="viewport-panel">
                     Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                </div>
-                <div className="info-box">
+                </div> */}
+            {/* <div className="info-box">
                     <p>
                         Draw your route using the draw tools on the right. To get the most accurate
                         route match, draw points at regular intervals.
                     </p>
                     <div id="directions"></div>
-                </div>
-                <MapboxMap
-                    //initialOptions={{ center: [38.0983, 55.7038] }}
-                    onLoaded={handleMapLoading}
-                    onCreated={onMapCreated}
-                    onCreatedMapDraw={onCreatedMapDraw}
-                    //onCreatedDirections={onMapCreatedDirections}
-                    initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
-                />
-            </div>
-            <button onClick={simulateRoute} disabled={isSimulating || !routeCoords.length}>
-                Simular
-            </button>
+                </div> */}
+            <MapboxMap
+                //initialOptions={{ center: [38.0983, 55.7038] }}
+                onLoaded={handleMapLoading}
+                onCreated={onMapCreated}
+                onCreatedMapDraw={onCreatedMapDraw}
+                //onCreatedDirections={onMapCreatedDirections}
+                initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
+            />
+            {/* </div> */}
             {loading && <MapLoadingHolder className="loading-holder" />}
         </main>
     );

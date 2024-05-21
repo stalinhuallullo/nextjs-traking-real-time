@@ -31,9 +31,15 @@
     background-position: left center;
     background-image: url(../../../public/image/msi-logo.jpg);
 }
+
 .menu-content {
     flex: 1;
 }
+
+.menu-content {
+    flex: 1;
+}
+
 .menu-close {
     position: relative;
     width: 60px;
@@ -58,17 +64,42 @@
     box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
 }
 
+.menu-item-link {
+    position: relative;
+    display: flex;
+    height: 100%;
+    padding-left: 10px;
+    text-align: left;
+    color: #142840;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-item-link:hover,
+.menu-item-link.active {
+    background-color: #f5f6f7;
+}
+
 .menu-item-link-icon {
     width: 60px;
     height: 60px;
-    background-image: url(../../../public/icons/logout.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url(../../../public/icons/icon_logout.png);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center; */
 }
-.menu-item-link-icon__notification{
+
+.menu-item-link-icon img {
+    width: 24px;
+    /* height: 16px; */
+}
+
+/* .menu-item-link-icon__notification{
     background-image: url(../../../public/icons/bell.png);
     background-repeat: no-repeat;
-}
+} */
 
 .menu-item-link-text {
     flex: 1;
@@ -84,23 +115,15 @@
     text-align: left;
 }
 
-.iconAbout>img {
+/* .iconAbout>img {
     height: 50px;
     margin: 5px;
     border-radius: 100%;
     border: 4px solid white;
     background-color: white;
-}
+} */
 
-.menu-item-link {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding-left: 10px;
-    text-align: left;
-    color: #142840;
-}
+
 
 @media screen and (min-width: 800px) {
     .main-menu {
@@ -141,7 +164,7 @@
         padding-left: 0;
     }
 
-    .menu-item-link-text {
+    /* .menu-item-link-text {
         display: none;
-    }
+    } */
 }

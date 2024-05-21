@@ -1,0 +1,287 @@
+.whereabout {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: 0;
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+    transition: transform .2s ease-out;
+    z-index: 3;
+}
+
+.whereabout-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: #fff;
+}
+
+.whereabout-header--title {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.whereabout-header--title-text {
+    display: flex;
+    align-items: center;
+}
+
+.whereabout-header--title-text-shortname {
+    display: block;
+    width: auto;
+    height: 40px;
+    text-align: center;
+    margin: 0 4px;
+    padding: 0 10px;
+    border-radius: 4px;
+    line-height: 40px;
+    font-size: 10px;
+    font-weight: 700;
+    /* white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; */
+    color: #fff;
+}
+
+/* .teaser-route .teaser-title-text-shortname, 
+.teaser-vehicle .teaser-title-text-shortname {
+    display: block;
+} */
+.whereabout-header--title-text-longname {
+    flex: 1;
+    max-height: 40px;
+    overflow: hidden;
+    /* padding-left: 16px; */
+    padding-left: 0;
+    font-size: 14px;
+}
+
+.whereabout-body {
+    height: 100%;
+}
+
+.whereabout-body-scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.whereabout-body-route-container {
+    height: calc(100% - 68px);
+    margin: 4px;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+}
+
+.whereabout-body-list {
+    height: 100%;
+    overflow: auto;
+}
+
+.whereabout-body-list li {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 60px;
+}
+
+.whereabout-body-list li::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    left: 50px;
+    right: 20px;
+    bottom: 0;
+    background-color: #f5f6f7;
+}
+
+.whereabout-body-list--details {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 100%;
+    padding: 10px 20px 0 50px;
+    font-weight: 700;
+}
+
+.whereabout-body-list--details .whereabout-body-list--details-stopName {
+    color: #142840;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.whereabout-body-list--details .whereabout-body-list--details-desc {
+    color: #8f94a0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    display: block;
+    font-weight: 700;
+}
+
+.whereabout-body-list--line {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.whereabout-body-list--line .colored-line {
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    border-color: white;
+}
+
+.whereabout-body-list li:first-child .colored-line {
+    top: 50%;
+}
+
+.whereabout-body-list li:first-child .colored-line,
+.whereabout-body-list li:last-child .colored-line {
+    height: 50%;
+}
+
+.whereabout-body-list--line .colored-busStop {
+    width: 10px;
+    height: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100%;
+    top: 50%;
+    margin: -5px 0 0 -5px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    border-color: white;
+}
+
+.whereabout-body-list li:first-child .colored-busStop,
+.whereabout-body-list li:last-child .colored-busStop {
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    border: none;
+}
+
+.whereabout-body-list li:first-child .colored-busStop::after,
+.whereabout-body-list li:last-child .colored-busStop::after {
+    content: '';
+    background-color: white;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+}
+
+.whereabout-body-list--bus {
+    left: 0;
+    width: 20px;
+    height: 16px;
+    position: absolute;
+    top: 50%;
+    display: none;
+}
+
+.whereabout-body-list--bus .whereabout-body-list--bus-elements {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border-radius: 100%;
+    background-color: currentColor;
+}
+
+.whereabout-body-list--bus .whereabout-body-list--bus-elements .whereabout-body-list--bus-elements-glass {
+    background-color: white;
+    width: 8px;
+    height: 4px;
+    border-radius: 1px;
+    position: absolute;
+    display: block;
+    left: 50%;
+    margin: 4px 0 0 -4px;
+}
+
+/* .whereabout-body-list--bus-elements-glass::before,
+.whereabout-body-list--bus-elements-glass::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: white;
+    border-radius: 100%;
+    margin-top: 6px;
+} */
+
+
+.whereabout-body-list--bus-elements-glass::before,
+.whereabout-body-list--bus-elements-glass::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: white;
+    border-radius: 100%;
+    margin-top: 6px;
+    margin-left: 5px;
+}
+
+.whereabout-body-list--bus-elements-glass::before {
+    margin-left: 0;
+}
+.whereabout-body-list li:hover,
+.whereabout-body-list li.active {
+    background-color: #f5f6f7;
+}
+@media screen and (min-width: 800px) {
+
+    .whereabout {
+        transition: none;
+        width: 360px;
+        top: 0;
+        left: 60px;
+        transform: none !important;
+    }
+
+    .whereabout-header {
+        height: 118px;
+        padding-top: 58px;
+    }
+
+    .whereabout-body-scroll-container {
+        height: calc(100% - 100px);
+    }
+
+    .whereabout-body-route-container {
+        height: calc(100% - 24px);
+    }
+
+    .whereabout-body-list {
+        height: 100%;
+    }
+
+    .whereabout-body-list li {
+        cursor: pointer;
+        transition: background-color .5s;
+    }
+
+    
+}

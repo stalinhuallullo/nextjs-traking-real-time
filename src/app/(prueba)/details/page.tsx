@@ -1,15 +1,17 @@
 "use client";
 
 import Head from "next/head";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import MapboxMap from "@/components/mapbox-map";
-import MapLoadingHolder from "@/components/map-loading-holder";
+import MapLoadingHolder from "@/components/loading/map-loading-holder";
 import { getMatchedRoute } from "@/utils/map-box/mapMatching";
 import mapbox from "@/utils/map-wrapper";
 import mapboxgl from "mapbox-gl";
 import { fetchGET } from "@/utils/fetcher";
+import { UIContext } from "@/context/ui";
 
 export default function Home() {
+
     const [loading, setLoading] = useState(true);
     const handleMapLoading = () => setLoading(false);
     const [carMarker, setCarMarker] = useState<mapboxgl.Marker | null>(null);
@@ -18,6 +20,8 @@ export default function Home() {
         center: [-77.0248, -12.0925],
         zoom: "13.00",
     });
+
+    
 
     const { center: [lng, lat], zoom } = viewport;
 
@@ -50,6 +54,8 @@ export default function Home() {
         console.log("viewport.center ==> ", viewport.center, lng, lat)
         const marker = new mapboxgl.Marker(carIcon).setLngLat([lng, lat]).addTo(mapbox.map);
         setCarMarker(marker);
+
+        buildLocationList();
     }, [])
 
 
@@ -100,14 +106,33 @@ export default function Home() {
 
                 // Crear marcador personalizado
                 const el = document.createElement('div');
-                el.className = 'marker';
+                el.className = 'marker fill-red';
 
                 // Agregar información emergente al marcador
                 new mapboxgl.Marker(el)
                     .setLngLat(store)
-                    .setPopup(new mapboxgl.Popup({ offset: 25 }) // agregar una ventana emergente
-                        .setHTML(`<h3>${store.name}</h3><p>${store.address}</p>`))
-                    .addTo(mapbox.map);
+                    .setPopup()
+                    // .setPopup(new mapboxgl.Popup({ offset: 25 }) // agregar una ventana emergente
+                    //     .setHTML(`<h3>${store.name}</h3><p>${store.address}</p>`))
+                    .addTo(mapbox.map)
+                    .getElement()
+                    .addEventListener('click', () => {
+                        //Fly to the point
+                        flyToStore(store);
+
+                        // Close all other popups and display popup for clicked store 
+                        createPopUp(store);
+
+                        // Highlight listing in sidebar (and remove highlight for all other listings) 
+                        const activeItem = document.getElementsByClassName('active');
+                        if (activeItem[0]) {
+                            activeItem[0].classList.remove('active');
+                        }
+                        const listing = document.getElementById(
+                            `listing-${store[0]}`
+                        );
+                        listing?.classList.add('active');
+                    });
             });
         }
     }
@@ -119,10 +144,10 @@ export default function Home() {
         if (matchedRoute && matchedRoute.matchings && matchedRoute.matchings[0]) {
             const route = matchedRoute.matchings[0].geometry;
 
-            /*console.log("mapInstance 22222 ===> ", mapInstance.getSource("route"))
-            if (mapInstance.getSource('route')) {
-                (mapInstance.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
-            } else {*/
+            // console.log("mapInstance 22222 ===> ", mapInstance.getSource("route"))
+            // if (mapInstance.getSource('route')) {
+            //     (mapInstance.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
+            // } else {
             mapInstance.addLayer({
                 id: 'route',
                 type: 'line',
@@ -162,24 +187,96 @@ export default function Home() {
         }
     }
 
+    const buildLocationList = () => {
+        const savedPoints = localStorage.getItem('savedPoints');
+        if (savedPoints) {
+            const parsedPoints = JSON.parse(savedPoints);
+            parsedPoints.geometry.coordinates.forEach((store: any, index: number) => {
+
+                console.log("ssssssssss ==> ", store[0])
+                /* Add a new listing section to the sidebar. */
+                const listings = document.getElementById('listings');
+                if (!listings) return
+
+                const listing = listings.appendChild(document.createElement('div'));
+                /* Assign a unique `id` to the listing. */
+                listing.id = `listing-${store[0]}`;
+                /* Assign the `item` class to each listing for styling. */
+                listing.className = 'item';
+
+                /* Add the link to the individual listing created above. */
+                const link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+                link.id = `link-${store[0]}`;
+                link.innerHTML = `${store[0]}`;
+                link.addEventListener('click', function (e) {
+                    console.log("this.id", this.id)
+                    if (this.id == `link-${store[0]}`) {
+                        flyToStore(store);
+                        createPopUp(store);
+                    }
+                    const activeItem = document.getElementsByClassName('active');
+                    if (activeItem[0]) {
+                        activeItem[0].classList.remove('active');
+                    }
+
+                    //parentNode.classList.add('active');
+                    this.parentNode?.classList.add('active')
+                })
+
+                /* Add details to the individual listing. */
+                const details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = `${store[0]}`;
+                if (store.properties?.phone != undefined) {
+                    details.innerHTML += ` &middot; ${store[0]}`;
+                }
+                if (store.properties?.distance) {
+                    const roundedDistance = Math.round(store[0] * 100) / 100;
+                    details.innerHTML += `<div><strong>${roundedDistance} miles away</strong></div>`;
+                }
+            })
+        }
+    }
+
+    const flyToStore = (currentFeature: any) => {
+        mapbox.map.flyTo({
+            center: currentFeature,
+            zoom: 15
+        });
+    }
+
+    const createPopUp = (currentFeature: any) => {
+        const popUps = document.getElementsByClassName('mapboxgl-popup');
+        /** Check if there is already a popup on the map and if so, remove it */
+        if (popUps[0]) popUps[0].remove();
+
+        const popup = new mapboxgl.Popup({ closeOnClick: false })
+            .setLngLat(currentFeature)
+            .setHTML(`<h3>PARADERO</h3><h4>${currentFeature[0]} aaaa</h4>`)
+            .addTo(mapbox.map);
+    }
+
     return (
-        <section id="mapView" className="fullscreen">
-            {/* <div className="map-wrapper"> */}
-            <div className="viewport-panel">
-                Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                <br />
-                <br />
-                <button onClick={centerCar}>CARRITO</button>
-            </div>
-            <MapboxMap
-                //initialOptions={{ center: [38.0983, 55.7038] }}
-                onLoaded={handleMapLoading}
-                onCreatedMapDraw={onCreatedMapDraw}
-                //onCreatedDirections={onMapCreatedDirections}
-                initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
-            />
-            {/* </div> */}
-            {loading && <MapLoadingHolder className="loading-holder" />}
-        </section>
+        <>
+            <section id="mapView" className="fullscreen">
+                {/* <div className="map-wrapper"> */}
+                {/* <div className="viewport-panel">
+                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+                    <br />
+                    <br />
+                    <button onClick={centerCar}>CARRITO</button>
+                </div> */}
+                <MapboxMap
+                    //initialOptions={{ center: [38.0983, 55.7038] }}
+                    onLoaded={handleMapLoading}
+                    onCreatedMapDraw={onCreatedMapDraw}
+                    //onCreatedDirections={onMapCreatedDirections}
+                    initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
+                />
+                {/* </div> */}
+                {loading && <MapLoadingHolder className="loading-holder" />}
+            </section>
+        </>
     );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import NavVertical from "@/components/nav-vertical/nav";
+import { UIProvider } from "@/context/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +17,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <NavVertical />
-
-                {children}
-            </body>
-        </html>
+        <UIProvider>
+            <html lang="en">
+                <body className={inter.className}>
+                    <NavVertical />
+                    {children}
+                </body>
+            </html>
+        </UIProvider>
     );
 }

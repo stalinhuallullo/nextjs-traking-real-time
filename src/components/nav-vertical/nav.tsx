@@ -1,6 +1,35 @@
+"use client"
 import "./nav-vertical.css";
+import icon_logout from '@public/icons/icon_logout.png'
+import { MENU } from "./menu";
+import ItemMenu from "./item";
+import ListWhereAbout from "../list-points/whereabout/list-whereabout";
+import ListRoutes from "../list-points/routes/list-route";
+import { UIContext } from '@/context/ui';
+import { useContext, useEffect, useMemo } from "react";
+import MessageNenu from "../list-points/message/message-menu";
 
 const NavVertical = () => {
+    const { isMenu } = useContext(UIContext);
+
+    const viewResultMenu = useMemo(() => {
+        
+        if (isMenu === "BELL") return <MessageNenu />
+        else if (isMenu === "RUTE") return <ListRoutes />
+        else if (isMenu === "WHEREABOUT") return <ListWhereAbout />
+        else return <></>
+    }, [isMenu]);
+
+    // const viewResultMenu = () => {
+    //     if (isMenu === "RUTE") return <ListRoutes />
+    //     else if (isMenu === "WHEREABOUT") return <ListWhereAbout />
+    //     else return <></>
+    // }
+
+    // useEffect(() => {
+    //     viewResultMenu()
+    // }, [isMenu])
+
     return (
         <>
             <section className="hiddenByTransition main-menu">
@@ -9,34 +38,39 @@ const NavVertical = () => {
                     <button className="menu-close" id="closeMenuButton"></button>
                 </div>
                 <ul className="menu-content">
-                    <li className="menu-item menu-item-msg">
-                        <a href="javascript://" id="menuMsgButton" className="menu-item-link">
-                            <div className="menu-item-link-icon menu-item-link-icon__notification"></div>
-                            <span className="menu-item-link-text" id="menuMsgButtonSpan">Mensaje</span>
-                        </a>
-                        <div id="menuNbMsgUnreadContainer" className="false-notif hidden">
-                            <span id="menuNbMsgUnread" className="false-notif-text">0</span>
-                        </div>
-                    </li>
+                    {
+                        MENU.map((item, index) => {
+                            return (
+                                <ItemMenu item={item} key={index} />
+                            )
+                        })
+                    }
                 </ul>
                 <ul className="menu-network">
-                    <li className="menu-item big-item">
-                        <div className="menu-item-link-icon iconAbout">
-                            <img id="icon" src="https://storage.googleapis.com/zoomzoomzenlive.appspot.com/SanIsidro.jpg" />
+                    {/* <li className="menu-item big-item">
+                        <div className="menu-item-link-icon">
+                            <img id="icon" src={icon_logo.src} />
                         </div>
                         <div className="menu-network-name">
                             <span id="menuAboutButtonSpan">La red seleccionada es</span>
                             <span id="menuAboutButtonSubtitle">Expreso San Isidro</span>
                         </div>
-                    </li>
+                    </li> */}
                     <li className="menu-item exit-item">
-                        <a href="javascript://" id="menuExitContainer" className="menu-item-link">
-                            <div className="menu-item-link-icon"></div>
-                            <span className="menu-item-link-text" id="menuExit" title="Changer de réseau">Dejar la red actual</span>
+                        <a href="#" className="menu-item-link">
+                            <div className="menu-item-link-icon">
+                                <img src={icon_logout.src} alt="" />
+                            </div>
+                            <span className="menu-item-link-text" title="Changer de réseau">Salir</span>
                         </a>
                     </li>
                 </ul>
             </section>
+
+            {viewResultMenu}
+            {/* <ListWhereAbout />
+            <ListRoutes /> */}
+
         </>
     )
 }
