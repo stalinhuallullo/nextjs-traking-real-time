@@ -21,7 +21,7 @@ export default function Home() {
         zoom: "13.00",
     });
 
-    
+
 
     const { center: [lng, lat], zoom } = viewport;
 
@@ -54,6 +54,16 @@ export default function Home() {
         console.log("viewport.center ==> ", viewport.center, lng, lat)
         const marker = new mapboxgl.Marker(carIcon).setLngLat([lng, lat]).addTo(mapbox.map);
         setCarMarker(marker);
+        
+        mapInstance.on('click', 'route', () => {
+            console.log("ssssssssssss")
+            // const newColor = routeColor === 'blue' ? 'red' : 'blue';
+            // setRouteColor(newColor);
+    
+            if (mapInstance.getLayer('route')) {
+              mapInstance.setPaintProperty('route', 'line-color', "blue");
+            }
+          });
 
         buildLocationList();
     }, [])
@@ -148,23 +158,24 @@ export default function Home() {
             // if (mapInstance.getSource('route')) {
             //     (mapInstance.getSource('route') as mapboxgl.GeoJSONSource).setData(route);
             // } else {
+           
+            
             mapInstance.addLayer({
                 id: 'route',
                 type: 'line',
                 source: {
                     type: 'geojson',
-                    data: route
+                    data: route,
                 },
                 layout: {
                     'line-join': 'round',
                     'line-cap': 'round'
                 },
                 paint: {
-                    'line-color': '#1DB954',
-                    'line-width': 4
+                    'line-color': 'rgb(228, 26, 10)',
+                    'line-width': 8,
                 }
             });
-            // }
         }
     };
 

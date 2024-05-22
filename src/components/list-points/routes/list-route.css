@@ -162,6 +162,13 @@
     bottom: 0;
     background-color: #f5f6f7;
 }
+.list-route li.active,
+.list-route li.active .route-body .route-colored-line-container::after,
+.list-route li:hover,
+.list-route li:hover .route-body .route-colored-line-container::after {
+    background-color: #f5f6f7;
+    transition: background-color .5s;
+}
 
 @media screen and (min-width: 800px) {
     .list-route {
@@ -173,10 +180,6 @@
         background-color: transparent;
     }
 
-    .list-route li:hover,
-    .list-route li:hover .route-body .route-colored-line-container::after{
-        background-color: #f5f6f7;
-        transition: background-color .5s;
-    }
+
 
 }

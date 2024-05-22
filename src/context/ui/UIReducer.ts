@@ -9,15 +9,12 @@ export const uiReducer = (state: UiState, action: UiActionType): UiState => {
                 ...state,
                 isMenu: action.payload,
             };
-        case "[UI] - SetMenu":
+        case "[UI] - SetLocalStorageRute":
+            localStorage.setItem("rute", action.payload)
+
             return {
                 ...state,
-                isMenu: action.payload,
-            };
-        case "[UI] - GetMenu":
-            return {
-                ...state,
-                isMenu: action.payload,
+                localStorageRute: action.payload,
             };
 
         default:

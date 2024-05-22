@@ -95,10 +95,13 @@ export default function Home() {
     };
 
     const drawRoute = async (coordinates: number[][], mapInstance: mapboxgl.Map) => {
+        localStorage.setItem("_DRAWROUTE_", coordinates.toString())
         const matchedRoute = await getMatchedRoute(coordinates);
 
         if (matchedRoute && matchedRoute.matchings && matchedRoute.matchings[0]) {
             const route = matchedRoute.matchings[0].geometry;
+            localStorage.setItem("_DRAWROUTE_ROUTE_", route.toString())
+
             console.log("route ===> " + JSON.stringify(route))
 
             // if (mapInstance.getSource('route') != undefined) {

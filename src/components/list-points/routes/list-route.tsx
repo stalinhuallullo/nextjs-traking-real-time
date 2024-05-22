@@ -63,7 +63,7 @@ const ListRoutes = () => {
                         {
                             RUTES.map((rute) => {
                                 return (
-                                    <ItemRoute rute={rute} key={rute.code} />
+                                    <ItemRoute item={rute} key={rute.code} />
                                     // <li>
                                     //     <div className="route-title">
                                     //         <span className="route-list-label color-bright" style={{ background: color }}>RUTA {rute.code}</span>

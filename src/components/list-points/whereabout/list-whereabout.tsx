@@ -143,10 +143,6 @@ const ListWhereAbout = () => {
 
     const [color, setColor] = useState(WHEREABOUT.rute.color)
 
-    useEffect(() => {
-        //setColor(generarColorRandom())
-    }, [])
-
     return (
         <>
             {/* <div className="sidebar">

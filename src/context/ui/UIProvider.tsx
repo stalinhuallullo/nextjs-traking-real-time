@@ -4,11 +4,13 @@ import { UIContext, uiReducer } from "./";
 
 export interface UiState {
   isMenu: string;
+  localStorageRute: string;
   isMenuActive: boolean;
 }
 
 const UI_INITIAL_STATE: UiState = {
   isMenu: "RUTE",
+  localStorageRute: localStorage.getItem("rute") ?? "",
   isMenuActive: true,
 };
 
@@ -19,13 +21,12 @@ export const UIProvider = ({ children }: any) => {
     dispatch({ type: "[UI] - ToggleMenu", payload: menu });
   };
 
-  const setMenu = (menu: string) => {
-    dispatch({ type: "[UI] - SetMenu", payload: menu });
+  const setLocalStorageRute = (localStorageRute: string) => {
+    dispatch({ type: "[UI] - SetLocalStorageRute", payload: localStorageRute });
   };
 
-  const getMenu = (menu: string) => {
-    dispatch({ type: "[UI] - GetMenu", payload: menu });
-  };
+
+
 
   return (
     <UIContext.Provider
@@ -34,6 +35,7 @@ export const UIProvider = ({ children }: any) => {
 
         // Methods
         toggleSideMenu,
+        setLocalStorageRute,
       }}
     >
       {children}

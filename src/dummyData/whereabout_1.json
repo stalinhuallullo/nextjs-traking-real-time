@@ -1,0 +1,217 @@
+{
+    "rute": {
+        "code": "01",
+        "name": "PERIFERICA",
+        "color": "rgb(228, 26, 10)"
+    },
+    "whereabout": [
+        {
+            "code": 1,
+            "name": "Av. Guardia Civil cuadra 7",
+            "coordinates": {
+                "lat": "-77.01162305900736",
+                "lng": "-12.097013577340647"
+            }
+        },
+        {
+            "code": 2,
+            "name": "Av. Del Parque Norte cuadra 7",
+            "coordinates": {
+                "lat": "-77.01290851907356",
+                "lng": "-12.100452794335823"
+            }
+        },
+        {
+            "code": 3,
+            "name": "Av. Barrenechea con Av. Del Parque Sur",
+            "coordinates": {
+                "lat": "-77.01144411753478",
+                "lng": "-12.102946515625419"
+            }
+        },
+        {
+            "code": 4,
+            "name": "Av. Parque Sur cuadra 2",
+            "coordinates": {
+                "lat": "-77.01459466364628",
+                "lng": "-12.103025912426645"
+            }
+        },
+        {
+            "code": 5,
+            "name": "Av. Aramburú cuadra 9",
+            "coordinates": {
+                "lat": "-77.01956065211711",
+                "lng": "-12.101916964860706"
+            }
+        },
+        {
+            "code": 6,
+            "name": "Av. Aramburu cuadra 4",
+            "coordinates": {
+                "lat": "-77.0258364331911",
+                "lng": "-12.10259264116442"
+            }
+        },
+        {
+            "code": 7,
+            "name": "AV. Aramburu cuadra 1",
+            "coordinates": {
+                "lat": "-77.03139444227625",
+                "lng": "-12.10340959362054"
+            }
+        },
+        {
+            "code": 8,
+            "name": "Óvalo Gutierrez",
+            "coordinates": {
+                "lat": "-77.03653397297494",
+                "lng": "-12.109791724587737"
+            }
+        },
+        {
+            "code": 9,
+            "name": "Ca. Miguel Dasso con C. Victor Maurtua",
+            "coordinates": {
+                "lat": "-77.04026334045729",
+                "lng": "-12.106929065222431"
+            }
+        },
+        {
+            "code": 10,
+            "name": "Residencial Santa Cruz (Av. Belén cuadra 4)",
+            "coordinates": {
+                "lat": "-77.04828511294679",
+                "lng": "-12.109194523710798"
+            }
+        },
+        {
+            "code": 11,
+            "name": "Policlínico Municipal (Ca. Paul Harris) ",
+            "coordinates": {
+                "lat": "-77.05024175610964",
+                "lng": "-12.107672462371482"
+            }
+        },
+        {
+            "code": 12,
+            "name": "Av. Perez Aranibar cuadra 16",
+            "coordinates": {
+                "lat": "-77.05428809929552",
+                "lng": "-12.107193148544255"
+            }
+        },
+        {
+            "code": 13,
+            "name": "Av. Perez Aranibar cuadra 21",
+            "coordinates": {
+                "lat": "-77.0582148073365",
+                "lng": "-12.102944913075731"
+            }
+        },
+        {
+            "code": 14,
+            "name": "CEV POLAR",
+            "coordinates": {
+                "lat": "-77.05710339013329",
+                "lng": "-12.095928961708097"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29",
+            "coordinates": {
+                "lat": "-77.05488090662149",
+                "lng": "-12.096464268267653"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.05132161648925",
+                "lng": "-12.089551071679878"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.04835812146804",
+                "lng": "-12.086954163400264"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.04774456945934",
+                "lng": "-12.091233476595079"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.0377906785823",
+                "lng": "-12.092728814220806"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.0352676284057",
+                "lng": "-12.094528815005546"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.0310316299374",
+                "lng": "-12.095269787683236"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.02456942130169",
+                "lng": "-12.094415418059143"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.01910025355433",
+                "lng": "-12.093565152560217"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.01406522719101",
+                "lng": "-12.09201625888386"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.01062851519725",
+                "lng": "-12.093241674876424"
+            }
+        },
+        {
+            "code": 15,
+            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "coordinates": {
+                "lat": "-77.01162407074482",
+                "lng": "-12.097010358560837"
+            }
+        }
+    ]
+}
