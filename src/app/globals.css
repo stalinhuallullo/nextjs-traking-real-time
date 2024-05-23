@@ -200,6 +200,12 @@ LAYOUT PARA MAPS
   }
 }
 
+
+/*******************/
+.marker.hidden {
+  opacity: 0;
+}
+
 .car-icon {
   background-image: url(../../public/icons/car_blue_icon.png);
   background-size: cover;
@@ -207,10 +213,12 @@ LAYOUT PARA MAPS
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+  transition: opacity 0.5s ease-out;
+}
+.car-icon.hidden {
+  opacity: 0;
 }
 
-
-/*******************/
 .sidebar {
   position: absolute;
   width: 350px;

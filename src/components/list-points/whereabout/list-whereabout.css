@@ -9,6 +9,7 @@
     box-shadow: 0 0 2px rgb(0 0 0 / 10%);
     transition: transform .2s ease-out;
     z-index: 3;
+    background-color: #fff;
 }
 
 .whereabout-header {

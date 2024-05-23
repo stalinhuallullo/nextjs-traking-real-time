@@ -3,9 +3,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Rute } from './list-route'
 import { UIContext } from '@/context/ui'
+import { Route } from '@/interfaces/routes-interface'
 
 interface Props {
-    item: Rute
+    item: Route
 }
 
 const ItemRoute = ({ item }: Props) => {
@@ -31,7 +32,7 @@ const ItemRoute = ({ item }: Props) => {
                     <span className="route-colored-line" style={{ background: color }}></span>
                     <span className="route-colored-stop" style={{ borderColor: color }}></span>
                 </div>
-                <span className="route-list-directions">{item.rutes.init} -&gt; {item.rutes.finish}</span>
+                <span className="route-list-directions">{item.limit.init} -&gt; {item.limit.finish}</span>
                 <span className="route-list-longname"></span>
                 <div className="route-list-alert">
                     <span className="route-list-alert-icon"></span>

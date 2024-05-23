@@ -42,16 +42,6 @@ const MapboxMap = ({
       ...initialOptions,
     });
 
-    // Generar ruta de bus
-    /*const mapboxDirections = new MapboxDirections({
-      accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
-      unit: 'metric',
-      profile: 'mapbox/driving',
-      steps: true,
-      overview: 'full',
-    });
-    mapboxMap.addControl(mapboxDirections, 'top-left');*/
-
     // Dibujar ruta de acuerdo a los puntos marcados
     const draw = new MapboxDraw({
       // Instead of showing all the draw tools, show only the line string and delete tools.
@@ -111,7 +101,7 @@ const MapboxMap = ({
         }
       ]
     });
-    mapboxMap.addControl(draw);
+    //mapboxMap.addControl(draw);
 
 
     

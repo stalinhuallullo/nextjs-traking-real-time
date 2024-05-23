@@ -1,5 +1,5 @@
 {
-    "rute": {
+    "route": {
         "code": "03",
         "name": "SUR CENTRO FINANCIERO",
         "color": "rgb(160, 230, 11)"
@@ -9,120 +9,40 @@
             "code": 1,
             "name": "Av. Guardia Civil cuadra 7",
             "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
+                "lat": "-77.01162305900736",
+                "lng": "-12.097013577340647"
             }
         },
         {
             "code": 2,
-            "name": "CEV CORPAC",
+            "name": "Av. Del Parque Norte cuadra 7",
             "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
+                "lat": "-77.01290851907356",
+                "lng": "-12.100452794335823"
             }
         },
         {
             "code": 3,
             "name": "Av. Barrenechea con Av. Del Parque Sur",
             "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
+                "lat": "-77.01144411753478",
+                "lng": "-12.102946515625419"
             }
         },
         {
             "code": 4,
             "name": "Av. Parque Sur cuadra 2",
             "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
+                "lat": "-77.01459466364628",
+                "lng": "-12.103025912426645"
             }
         },
         {
             "code": 5,
             "name": "Av. Aramburú cuadra 9",
             "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 6,
-            "name": "Av. Aramburu cuadra 4",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 7,
-            "name": "AV. Aramburu cuadra 1",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 8,
-            "name": "Óvalo Gutierrez",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 9,
-            "name": "Ca. Miguel Dasso con C. Victor Maurtua",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 10,
-            "name": "Residencial Santa Cruz (Av. Belén cuadra 4)",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 11,
-            "name": "Policlínico Municipal (Ca. Paul Harris) ",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 12,
-            "name": "Av. Perez Aranibar cuadra 16",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 13,
-            "name": "Av. Perez Aranibar cuadra 21",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 14,
-            "name": "CEV POLAR",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
-            }
-        },
-        {
-            "code": 15,
-            "name": "AV. SALAVERRY CUADRA 29",
-            "coordinates": {
-                "lat": "-12.10101010",
-                "lng": "-12.10101010"
+                "lat": "-77.01956065211711",
+                "lng": "-12.101916964860706"
             }
         }
     ]

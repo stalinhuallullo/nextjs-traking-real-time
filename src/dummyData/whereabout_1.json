@@ -1,5 +1,5 @@
 {
-    "rute": {
+    "route": {
         "code": "01",
         "name": "PERIFERICA",
         "color": "rgb(228, 26, 10)"
@@ -126,7 +126,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 16,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.05132161648925",
@@ -134,7 +134,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 17,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.04835812146804",
@@ -142,7 +142,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 18,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.04774456945934",
@@ -150,7 +150,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 19,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.0377906785823",
@@ -158,7 +158,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 20,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.0352676284057",
@@ -166,7 +166,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 21,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.0310316299374",
@@ -174,7 +174,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 22,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.02456942130169",
@@ -182,7 +182,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 23,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.01910025355433",
@@ -190,7 +190,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 24,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.01406522719101",
@@ -198,7 +198,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 25,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.01062851519725",
@@ -206,7 +206,7 @@
             }
         },
         {
-            "code": 15,
+            "code": 26,
             "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
             "coordinates": {
                 "lat": "-77.01162407074482",
