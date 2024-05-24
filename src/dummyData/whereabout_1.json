@@ -127,7 +127,7 @@
         },
         {
             "code": 16,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 30",
             "coordinates": {
                 "lat": "-77.05132161648925",
                 "lng": "-12.089551071679878"
@@ -135,7 +135,7 @@
         },
         {
             "code": 17,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 31",
             "coordinates": {
                 "lat": "-77.04835812146804",
                 "lng": "-12.086954163400264"
@@ -143,7 +143,7 @@
         },
         {
             "code": 18,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 32",
             "coordinates": {
                 "lat": "-77.04774456945934",
                 "lng": "-12.091233476595079"
@@ -151,7 +151,7 @@
         },
         {
             "code": 19,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 33",
             "coordinates": {
                 "lat": "-77.0377906785823",
                 "lng": "-12.092728814220806"
@@ -159,7 +159,7 @@
         },
         {
             "code": 20,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 34",
             "coordinates": {
                 "lat": "-77.0352676284057",
                 "lng": "-12.094528815005546"
@@ -167,7 +167,7 @@
         },
         {
             "code": 21,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 35",
             "coordinates": {
                 "lat": "-77.0310316299374",
                 "lng": "-12.095269787683236"
@@ -175,7 +175,7 @@
         },
         {
             "code": 22,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 36",
             "coordinates": {
                 "lat": "-77.02456942130169",
                 "lng": "-12.094415418059143"
@@ -183,7 +183,7 @@
         },
         {
             "code": 23,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "AV. SALAVERRY CUADRA 37",
             "coordinates": {
                 "lat": "-77.01910025355433",
                 "lng": "-12.093565152560217"
@@ -199,18 +199,10 @@
         },
         {
             "code": 25,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
+            "name": "Av. Guardia Civil cuadra 7",
             "coordinates": {
-                "lat": "-77.01062851519725",
-                "lng": "-12.093241674876424"
-            }
-        },
-        {
-            "code": 26,
-            "name": "AV. SALAVERRY CUADRA 29sssssssssssssssssssssssssssss",
-            "coordinates": {
-                "lat": "-77.01162407074482",
-                "lng": "-12.097010358560837"
+                "lat": "-77.01162305900736",
+                "lng": "-12.097013577340647"
             }
         }
     ]

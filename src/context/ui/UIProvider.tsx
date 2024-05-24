@@ -1,6 +1,8 @@
 "use client"
-import { FC, useReducer } from "react";
+import { FC, useEffect, useReducer, useState } from "react";
 import { UIContext, uiReducer } from "./";
+import { getApiRoutes } from "@/utils/functions-utils";
+import { Route } from "@/interfaces/routes-interface";
 
 export interface UiState {
   isMenu: string;
@@ -10,7 +12,7 @@ export interface UiState {
 
 const UI_INITIAL_STATE: UiState = {
   isMenu: "RUTE",
-  localStorageRute: localStorage.getItem("rute") ?? "",
+  localStorageRute: "01",
   isMenuActive: true,
 };
 
@@ -25,6 +27,7 @@ export const UIProvider = ({ children }: any) => {
     dispatch({ type: "[UI] - SetLocalStorageRute", payload: localStorageRute });
   };
 
+  
 
 
 

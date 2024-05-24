@@ -8,21 +8,27 @@ import mapbox from "@/utils/map-wrapper";
 import mapboxgl from "mapbox-gl";
 import { fetchGET } from "@/utils/fetcher";
 import { UIContext } from "@/context/ui";
-import { RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
+import { Route, RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
+import { getApiRoutes } from "@/utils/functions-utils";
+import { getDataWhereAbout, newMarker, getCurrentPosition, newMarkerWithoutPopup } from "@/utils/functions-map";
 
 export default function Details() {
-    const { localStorageRute } = useContext(UIContext);
+    const { localStorageRute, setLocalStorageRute } = useContext(UIContext);
     const [loading, setLoading] = useState(true);
     const [mapInstance, setMapInstance] = useState<mapboxgl.Map | null>(null);
     const [carMarker, setCarMarker] = useState<mapboxgl.Marker | null>(null);
     const [routeMarkers, setRouteMarkers] = useState<mapboxgl.Marker[]>([]);
+    const [userMarker, setUserMarker] = useState<mapboxgl.Marker | null>(null);
+
     const handleMapLoading = () => setLoading(false);
     const [viewport, setViewport] = useState({
-        center: [-77.0248, -12.0925],
+        coordinate: {
+            lat: -12.0925,
+            lng: -77.0248
+        },
         zoom: "13.00"
     });
 
-    const { center: [lng, lat], zoom } = viewport;
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -34,7 +40,7 @@ export default function Details() {
 
 
     const updateVehicleLocation = async () => {
-        const locations = await fetchGET(process.env.NEXT_PUBLIC_REST_API_LOCATION + "/EXPRESOBUS/ListarGPSExpresoRuta?CODLINEA=01");
+        const locations = await fetchGET(`${process.env.NEXT_PUBLIC_REST_API_DUMMY}/live-route-cars/${localStorageRute}`);
 
 
         if (locations.Respuesta !== "Exito" || !locations.Datos || locations.Datos.length === 0) {
@@ -48,24 +54,17 @@ export default function Details() {
 
         // Usar la última coordenada válida
         const [tmpLat, tmpLgn] = validCoordinates[validCoordinates.length - 1];
-        console.log("latestCoordinates ==>", [tmpLgn, tmpLat])
         if (locations && carMarker) {
             carMarker.setLngLat([tmpLgn, tmpLat]);
         }
     };
-
-
-    const getData = async () => {
-        const apiResponse: RoutesWhereabout = await fetchGET(`${process.env.NEXT_PUBLIC_REST_API_DUMMY}/whereabout/${localStorageRute}`);
-        return apiResponse;
-    }
 
     const showDataWhereAbout = async () => {
         const points = localStorage.getItem('_WHEREABOUTS_');
         let pointsJson: RoutesWhereabout | null = points ? JSON.parse(points) : null;
 
         if (!(pointsJson?.route.code === localStorageRute)) {
-            pointsJson = await getData();
+            pointsJson = await getDataWhereAbout(localStorageRute.toString());
             localStorage.setItem('_WHEREABOUTS_', JSON.stringify(pointsJson));
         }
 
@@ -75,12 +74,10 @@ export default function Details() {
     }
 
     const cleanMarker = () => {
-        routeMarkers.forEach((marker) => {
-            marker.remove()
-            setTimeout(() => marker.remove(), 500);
-        })
+        routeMarkers.forEach((marker) => marker.remove())
         setRouteMarkers([])
     }
+
     const showMarkerWhereAbout = async () => {
         cleanMarker()
 
@@ -88,55 +85,12 @@ export default function Details() {
         let pointsJson: RoutesWhereabout | null = points ? JSON.parse(points) : null;
 
         if (!(pointsJson?.route.code === localStorageRute)) {
-            pointsJson = await getData();
+            pointsJson = await getDataWhereAbout(localStorageRute.toString());
             localStorage.setItem('_WHEREABOUTS_', JSON.stringify(pointsJson));
         }
 
-        const newMarkers  = pointsJson.whereabout.map((point: Whereabout) => {
-            const el = document.createElement('div');
-            el.className = 'marker';
-
-            return new mapboxgl.Marker(el)
-                .setLngLat([+point.coordinates.lat, +point.coordinates.lng])
-                // .setPopup(new mapboxgl.Popup({ offset: 25 }) // agregar una ventana emergente
-                //     .setHTML(`<h3>${store.name}</h3><p>${store.address}</p>`))
-                .addTo(mapbox.map)
-                .setPopup(
-                    new mapboxgl.Popup({ offset: 25 }) // add popups
-                      .setHTML('</h3><p>' + point.name + '</p>' )
-                  )
-                // .addEventListener('click', () => {
-                //     //Fly to the point
-                //     flyToStore(point);
-
-                //     // Close all other popups and display popup for clicked store 
-                //     createPopUp(point);
-                // })
-        })
-        setRouteMarkers(newMarkers )
-
-
-    }
-
-    const createPopUp = (point: Whereabout) => {
-        const popUps = document.getElementsByClassName('mapboxgl-popup');
-        /** Check if there is already a popup on the map and if so, remove it */
-        if (popUps[0]) popUps[0].remove();
-
-        const popup = new mapboxgl.Popup({ closeOnClick: false })
-            .setLngLat([+point.coordinates.lat, +point.coordinates.lng])
-            .setHTML(`
-                <h3>PARADERO</h3>
-                <h4>${point.name}</h4>
-            `)
-            .addTo(mapbox.map);
-    }
-
-    const flyToStore = (point: Whereabout) => {
-        mapbox.map.flyTo({
-            center: [+point.coordinates.lat, +point.coordinates.lng],
-            zoom: 15
-        });
+        const newMarkers = pointsJson.whereabout.map((point: Whereabout) => newMarker(point))
+        setRouteMarkers(newMarkers)
     }
 
     const drawingRoutes = async (coordinates: RoutesWhereabout, mapInstance: mapboxgl.Map) => {
@@ -147,24 +101,10 @@ export default function Details() {
         if (matchedRoute && matchedRoute.matchings && matchedRoute.matchings[0]) {
             const route = matchedRoute.matchings[0].geometry;
 
-            // if (mapInstance.getLayer('line')) {
-            //     mapInstance.removeLayer('line');
-            //     mapInstance.removeSource('line');
-            // }
-
-
             if (mapInstance.getLayer('line')) {
-                // Hide the layer instead of removing it
-                mapInstance.setLayoutProperty('line', 'visibility', 'none');
-                // Or you can remove the layer after a delay
-                setTimeout(() => {
-                    if (mapInstance.getLayer('line')) {
-                        mapInstance.removeLayer('line');
-                        mapInstance.removeSource('line');
-                    }
-                }, 500); // Wait for the animation to complete
+                mapInstance.removeLayer('line');
+                mapInstance.removeSource('line');
             }
-
 
             mapInstance.addLayer({
                 id: 'line',
@@ -193,29 +133,71 @@ export default function Details() {
         // Create car marker
         createMarkerCar()
 
+        // Location User
+        locateUser()
+
     }, []);
+
+    const locateUser = async () => {
+        try {
+            const position = await getCurrentPosition();
+            const { latitude, longitude } = position.coords;
+
+            if (userMarker) {
+                userMarker.setLngLat([longitude, latitude]);
+            } else {
+                const pointTmp: Whereabout = {
+                    code: "",
+                    name: "",
+                    coordinates: {
+                        lat: longitude.toString(),
+                        lng: latitude.toString()
+                    }
+                }
+
+
+                setUserMarker(newMarkerWithoutPopup(pointTmp, 'custom-marker-yo'));
+            }
+
+            // mapbox.map.flyTo({
+            //     center: [longitude, latitude],
+            //     zoom: 15
+            // });
+        } catch (error) {
+            console.error('Error obtaining user location:', error);
+        }
+    }
 
     const createMarkerCar = () => {
         const carIcon = document.createElement('div');
         carIcon.className = 'car-icon';
-        const marker = new mapboxgl.Marker(carIcon).setLngLat([lng, lat]).addTo(mapbox.map);
+        const marker = new mapboxgl.Marker(carIcon).setLngLat([viewport.coordinate.lng, viewport.coordinate.lat]).addTo(mapbox.map);
         setCarMarker(marker);
     }
 
     useEffect(() => {
         if (mapInstance) {
+            console.log("cambio de local", localStorageRute)
             showDataWhereAbout();
             showMarkerWhereAbout()
         }
     }, [localStorageRute, mapInstance]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            console.log("sssss")
+            locateUser
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+    }, [userMarker]);
 
     return (
         <section id="mapView" className="fullscreen">
             <MapboxMap
                 onLoaded={handleMapLoading}
                 onCreatedMapDraw={onCreatedMapDraw}
-                initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
-            />
+                initialOptions={{ center: [+viewport.coordinate.lng, +viewport.coordinate.lat], zoom: +viewport.zoom }} />
             {loading && <MapLoadingHolder className="loading-holder" />}
         </section>
     );

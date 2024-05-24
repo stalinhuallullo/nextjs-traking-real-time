@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useContext, useEffect, useState } from 'react'
-import { Rute } from './list-route'
+import React, { useContext, useState } from 'react'
 import { UIContext } from '@/context/ui'
 import { Route } from '@/interfaces/routes-interface'
 

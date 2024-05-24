@@ -215,6 +215,7 @@ LAYOUT PARA MAPS
   cursor: pointer;
   transition: opacity 0.5s ease-out;
 }
+
 .car-icon.hidden {
   opacity: 0;
 }
@@ -330,4 +331,35 @@ LAYOUT PARA MAPS
 
 .mapboxgl-popup-anchor-top>.mapboxgl-popup-tip {
   border-bottom-color: #91c949;
+}
+
+@keyframes shadow {
+  0% {
+    transform: scale(0.8);
+  }
+
+  30% {
+    transform: scale(1.1);
+  }
+
+  60% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* styles/custom-marker.css */
+.custom-marker-yo {
+  background-image: url(../../public/icons/icon_i.png);
+  /* Ruta a tu icono personalizado */
+  background-size: cover;
+  width: 50px;
+  /* Ajusta el tamaño según tu icono */
+  height: 50px;
+  /* Ajusta el tamaño según tu icono */
+  border-radius: 50%;
+  cursor: pointer;
 }

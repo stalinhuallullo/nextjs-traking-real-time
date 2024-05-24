@@ -4,7 +4,11 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import "./list-whereabout.css"
 import { UIContext } from "@/context/ui";
 import { fetchGET } from "@/utils/fetcher";
-import { RoutesWhereabout } from "@/interfaces/routes-interface";
+import { RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
+import mapbox from "@/utils/map-wrapper";
+import mapboxgl from "mapbox-gl";
+import { flyToStore } from "@/utils/functions-map";
+
 
 const generarColorRandom = () => {
     const r = Math.floor(Math.random() * 256)
@@ -13,7 +17,17 @@ const generarColorRandom = () => {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
-const Item = ({ items, color }: any) => {
+interface Propsitem {
+    items: RoutesWhereabout
+    color: string
+}
+
+const Item = ({ items, color }: Propsitem) => {
+    
+    const handlerClick = (point: Whereabout) => {
+        flyToStore(point)
+    }
+
 
     return (
         <>
@@ -32,9 +46,9 @@ const Item = ({ items, color }: any) => {
 
                             <ul className="whereabout-body-list">
                                 {
-                                    items?.whereabout.map((item: any) => {
+                                    items?.whereabout.map((item: Whereabout) => {
                                         return (
-                                            <li className={item.code === 3 ? "active" : ""} key={item.code}>
+                                            <li className={item.code === "03" ? "active" : ""} key={item.code} onClick={() => handlerClick(item)}>
                                                 <div className="whereabout-body-list--details">
                                                     <span className="whereabout-body-list--details-stopName">{item.name}</span>
                                                     {/* <span className="whereabout-body-list--details-desc">Paso planificado a 10h49</span> */}
@@ -69,6 +83,7 @@ const ListWhereAbout = () => {
     const [whereabout, setWhereabout] = useState<RoutesWhereabout | null>(null)
 
     const getData = async () => {
+        console.log("localStorageRute ==> ", localStorageRute)
         const apiResponse: RoutesWhereabout = await fetchGET(process.env.NEXT_PUBLIC_REST_API_DUMMY + "/whereabout/" + localStorageRute)
         return apiResponse
     }
@@ -79,6 +94,8 @@ const ListWhereAbout = () => {
             setWhereabout(data)
         })();
     }, [localStorageRute]);
+
+
 
     return (
         <>
