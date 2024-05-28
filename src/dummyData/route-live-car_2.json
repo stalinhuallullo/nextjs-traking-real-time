@@ -1,0 +1,20 @@
+{
+    "route": {
+        "code": "02",
+        "name": "NORTE CENTRO FINANCIERO",
+        "color": "rgb(255, 0, 0)"
+    },
+    "live": [
+        {
+            "vehicle": {
+                "placa": "GGG-123",
+                "brandVehicle": "TOYOTA"
+            },
+            "coordinate": {
+                "lat": "-77.0239917",
+                "lng": "-12.0968567"
+            },
+            "date": "24/06/2024"
+        }
+    ]
+}

@@ -2,7 +2,7 @@
     "route": {
         "code": "02",
         "name": "NORTE CENTRO FINANCIERO",
-        "color": "rgb(201, 15, 250)"
+        "color": "rgb(255, 0, 0)"
     },
     "whereabout": [
         {

@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -12,7 +11,6 @@ interface MapboxMapProps {
   initialOptions?: Omit<mapboxgl.MapboxOptions, "container">;
   onCreated?(map: mapboxgl.Map): void;
   onCreatedMapDraw?(draw: MapboxDraw, map: mapboxgl.Map): void;
-  //onCreatedDirections?(mapDirections: MapboxDirections): void;
   onLoaded?(map: mapboxgl.Map): void;
   onRemoved?(): void;
 }
@@ -21,7 +19,6 @@ const MapboxMap = ({
   initialOptions = {},
   onCreated,
   onCreatedMapDraw,
-  //onCreatedDirections,
   onLoaded,
   onRemoved,
 }: MapboxMapProps) => {
@@ -39,6 +36,7 @@ const MapboxMap = ({
       style: "mapbox://styles/mapbox/streets-v11",
       center: [-74.5, 40],
       zoom: 9,
+      maxZoom: 18,
       ...initialOptions,
     });
 
@@ -104,7 +102,7 @@ const MapboxMap = ({
     //mapboxMap.addControl(draw);
 
 
-    
+
     if (onCreated) onCreated(mapboxMap);
     if (onCreatedMapDraw) onCreatedMapDraw(draw, mapboxMap);
     //if (onCreatedDirections) onCreatedDirections(mapboxDirections);

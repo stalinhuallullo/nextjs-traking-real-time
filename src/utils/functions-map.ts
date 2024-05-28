@@ -1,6 +1,6 @@
 import mapboxgl from "mapbox-gl"
 import mapbox from "@/utils/map-wrapper";
-import { RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
+import { Live, LiveVehicle, RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
 import { fetchGET } from "./fetcher";
 
 export const flyToStore = (point: Whereabout) => {
@@ -17,6 +17,14 @@ export const createPopUp = (point: Whereabout) => {
     if (popUps[0]) popUps[0].remove();
 
     newPopup(point)
+}
+
+export const newMarkerVehicle = (item: Live) => {
+        const carIcon = document.createElement('div');
+        carIcon.className = 'car-icon';
+        //carIcon.appendChild("<h1>ssss</h1>")
+        carIcon.innerHTML = `<h1>ssss</h1>`
+        return new mapboxgl.Marker(carIcon).setLngLat([+item.coordinate.lat, +item.coordinate.lng]).addTo(mapbox.map);
 }
 
 export const newMarker = (point: Whereabout, classNameElement: string = 'marker') => {

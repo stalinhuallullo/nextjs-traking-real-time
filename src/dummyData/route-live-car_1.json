@@ -1,0 +1,31 @@
+{
+    "route": {
+        "code": "01",
+        "name": "PERIFERICA",
+        "color": "rgb(24, 50, 251)"
+    },
+    "live": [
+        {
+            "vehicle": {
+                "placa": "ABC-123",
+                "brandVehicle": "TOYOTA"
+            },
+            "coordinate": {
+                "lat": "-77.0253893",
+                "lng": "-12.0966441"
+            },
+            "date": "24/06/2024"
+        },
+        {
+            "vehicle": {
+                "placa": "ABC-456",
+                "brandVehicle": "TOYOTA"
+            },
+            "coordinate": {
+                "lat": "-77.0272758",
+                "lng": "-12.0977656"
+            },
+            "date": "24/06/2024"
+        }
+    ]
+}

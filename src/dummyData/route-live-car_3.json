@@ -1,0 +1,20 @@
+{
+    "route": {
+        "code": "03",
+        "name": "SUR CENTRO FINANCIERO",
+        "color": "rgb(238, 47, 222)"
+    },
+    "live": [
+        {
+            "vehicle": {
+                "placa": "BYN-123",
+                "brandVehicle": "TOYOTA"
+            },
+            "coordinate": {
+                "lat": "-77.0273184",
+                "lng": "-12.0977686"
+            },
+            "date": "24/06/2024"
+        }
+    ]
+}
