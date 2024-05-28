@@ -5,7 +5,7 @@ import classes from "@/app/(prueba)/location/Page.module.css";
 import MapboxMap from "@/components/mapbox-map";
 import mapboxgl from "mapbox-gl";
 import MapLoadingHolder from "@/components/loading/map-loading-holder";
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+//import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { getMatchedRoute } from '@/utils/map-box/mapMatching';
 import mapbox from "@/utils/map-wrapper";
 
@@ -25,9 +25,9 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
     const handleMapLoading = () => setLoading(false);
 
-    const [directions, setDirections] = useState<MapboxDirections | null>(null);
-    const [routeCoords, setRouteCoords] = useState<mapboxgl.LngLat[]>([]);
-    const [isSimulating, setIsSimulating] = useState(false);
+    // const [directions, setDirections] = useState<MapboxDirections | null>(null);
+    // const [routeCoords, setRouteCoords] = useState<mapboxgl.LngLat[]>([]);
+    // const [isSimulating, setIsSimulating] = useState(false);
 
 
     const [viewport, setViewport] = useState({
@@ -129,38 +129,14 @@ export default function Home() {
 
 
 
-    const onMapCreatedDirections = useCallback((mapDirections: MapboxDirections) => {
-        mapDirections.on('route', (e: any) => {
-            const coords = e.route[0].geometry.coordinates.map((coord: [number, number]) => new mapboxgl.LngLat(coord[0], coord[1]));
-            setRouteCoords(coords);
-        });
-
-        setDirections(mapDirections);
-    }, []);
-
-
     return (
         <main className="fullscreen">
-            {/* <div className="map-wrapper">
-                <div className="viewport-panel">
-                    Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-                </div> */}
-            {/* <div className="info-box">
-                    <p>
-                        Draw your route using the draw tools on the right. To get the most accurate
-                        route match, draw points at regular intervals.
-                    </p>
-                    <div id="directions"></div>
-                </div> */}
             <MapboxMap
-                //initialOptions={{ center: [38.0983, 55.7038] }}
                 onLoaded={handleMapLoading}
                 onCreated={onMapCreated}
                 onCreatedMapDraw={onCreatedMapDraw}
-                //onCreatedDirections={onMapCreatedDirections}
                 initialOptions={{ center: [+lng, +lat], zoom: +zoom }}
             />
-            {/* </div> */}
             {loading && <MapLoadingHolder className="loading-holder" />}
         </main>
     );

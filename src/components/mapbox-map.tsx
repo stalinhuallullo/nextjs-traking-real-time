@@ -105,7 +105,6 @@ const MapboxMap = ({
 
     if (onCreated) onCreated(mapboxMap);
     if (onCreatedMapDraw) onCreatedMapDraw(draw, mapboxMap);
-    //if (onCreatedDirections) onCreatedDirections(mapboxDirections);
     if (onLoaded) mapboxMap.once("load", () => onLoaded(mapboxMap));
 
     return () => {

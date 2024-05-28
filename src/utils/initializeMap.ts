@@ -15,7 +15,7 @@ export function initializeMap(mapboxgl: any, map: any) {
             });
     });
 
-    map.on("click", "unclustered-point", function (e) {
+    map.on("click", "unclustered-point", function (e: any) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var mag = e.features[0].properties.mag;
         var tsunami;
