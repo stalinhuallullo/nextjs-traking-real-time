@@ -132,8 +132,6 @@ body,
   cursor: pointer;
 }
 
-.marker.fill-red {}
-
 .info-box {
   position: absolute;
   margin: 20px;
@@ -183,22 +181,6 @@ LAYOUT PARA MAPS
   padding-top: 140px;
 }
 
-@media screen and (min-width: 800px) {
-  /* .main-menu {
-    width: 60px;
-  } */
-
-  .main-menu.hiddenByTransition {
-    transform: translate3d(0, 0, 0);
-  }
-
-  #mapView {
-    display: block !important;
-    width: 100%;
-    z-index: 499;
-    left: 0;
-  }
-}
 
 
 /*******************/
@@ -222,14 +204,18 @@ LAYOUT PARA MAPS
 
 .sidebar {
   position: absolute;
-  width: 350px;
+  width: 100%;
   height: 100%;
   top: 0;
-  left: 60px;
+  left: 0;
   overflow: hidden;
   border-right: 1px solid rgb(0 0 0 / 25%);
   background: white;
   z-index: 3;
+}
+
+.sidebar {
+  transform: translate3d(0, calc(100% - 60px), 0);
 }
 
 .heading {
@@ -362,4 +348,30 @@ LAYOUT PARA MAPS
   /* Ajusta el tamaño según tu icono */
   border-radius: 50%;
   cursor: pointer;
+}
+
+
+@media screen and (min-width: 800px) {
+
+  /* .main-menu {
+    width: 60px;
+  } */
+  .sidebar {
+    transition: none;
+    width: 360px;
+    top: 0;
+    left: 60px;
+    transform: none !important;
+  }
+
+  .main-menu.hiddenByTransition {
+    transform: translate3d(0, 0, 0);
+  }
+
+  #mapView {
+    display: block !important;
+    width: 100%;
+    z-index: 499;
+    left: 0;
+  }
 }

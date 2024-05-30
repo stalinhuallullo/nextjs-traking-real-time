@@ -12,6 +12,7 @@
     background-color: #fff;
 }
 
+
 .whereabout-header {
     display: flex;
     align-items: center;
@@ -30,6 +31,11 @@
 .whereabout-header--title-text {
     display: flex;
     align-items: center;
+    color: #000;
+}
+
+.whereabout-header--title-text--only {
+    padding-left: 16px;
 }
 
 .whereabout-header--title-text-shortname {
@@ -60,6 +66,146 @@
     /* padding-left: 16px; */
     padding-left: 0;
     font-size: 14px;
+}
+
+.whereabout-button {
+    position: relative;
+    width: 50px;
+    height: 100%;
+}
+
+.whereabout-button .teaser-label {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 0;
+    font-size: 8px;
+    text-align: center;
+}
+
+.whereabout-button .teaser-label--bottom {
+    bottom: 6px;
+}
+
+
+.whereabout-button .teaser-label::before,
+.whereabout-button .teaser-label::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    background-color: #142840;
+    opacity: 0;
+    transition: top .3s .3s, opacity .3s .3s;
+}
+
+.whereabout-button .teaser-label::before,
+.whereabout-button .teaser-label::after {
+    top: 25px;
+}
+
+.whereabout-button .teaser-label.teaser-label--top {
+    top: 6px;
+}
+
+.whereabout-button .teaser-label.teaser-label--top::before,
+.whereabout-button .teaser-label.teaser-label--top::after {
+    opacity: 1;
+}
+
+.teaser-style-small .teaser-label.teaser-label--top::before,
+.teaser-style-small .teaser-label.teaser-label--top::after {
+    opacity: 1;
+    top: 18px;
+}
+
+
+
+
+.whereabout-button .teaser-label.teaser-label--bottom::before,
+.whereabout-button .teaser-label.teaser-label--bottom::after {
+    opacity: 0;
+}
+
+.teaser-style-small .teaser-label.teaser-label--bottom::before,
+.teaser-style-small .teaser-label.teaser-label--bottom::after {
+    opacity: 1;
+    top: -10px;
+}
+
+
+.whereabout-button .teaser-label::before {
+    left: calc(50% - 7px);
+}
+
+.whereabout-button .teaser-label.teaser-label--top::before {
+    transform: rotateZ(-45deg);
+}
+
+.whereabout-button .teaser-label.teaser-label--top::after {
+    transform: rotateZ(45deg);
+}
+
+
+.whereabout.teaser-style-title {
+
+    transform: translate3d(0, calc(100% - 60px), 0);
+}
+
+.whereabout.teaser-style-small {
+    transform: translate3d(0, calc(100% - 284px), 0);
+}
+
+.whereabout.teaser-style-fullscreen {
+    transform: translate3d(0, 0, 0);
+}
+
+.whereabout.teaser-style-fullscreen .teaser-label.teaser-label--bottom::before,
+.whereabout.teaser-style-fullscreen .teaser-label.teaser-label--bottom::after {
+    opacity: 1;
+}
+
+.whereabout.teaser-style-fullscreen .teaser-label.teaser-label--top::before,
+.whereabout.teaser-style-fullscreen .teaser-label.teaser-label--top::after {
+    opacity: 0;
+}
+
+.whereabout-button .teaser-label::after {
+    left: calc(50% - 2px);
+}
+
+.whereabout-button .teaser-button-size {
+    position: relative;
+    width: 50px;
+    height: 100%;
+}
+
+.whereabout-button .teaser-label {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    padding: 0;
+    font-size: 8px;
+    text-align: center;
+}
+
+.whereabout-button .teaser-label.teaser-label--bottom {
+    bottom: 6px;
+}
+
+.whereabout-button .teaser-label.teaser-label--bottom::before {
+    transform: rotateZ(45deg);
+}
+
+.whereabout-button .teaser-label.teaser-label--bottom::after {
+    left: calc(50% - 2px);
+    transform: rotateZ(-45deg);
+
+}
+
+.whereabout-button .teaser-label.teaser-label--bottom::before,
+.whereabout-button .teaser-label.teaser-label--bottom::after {
+    top: -10px;
 }
 
 .whereabout-body {
@@ -248,10 +394,12 @@
 .whereabout-body-list--bus-elements-glass::before {
     margin-left: 0;
 }
+
 .whereabout-body-list li:hover,
 .whereabout-body-list li.active {
     background-color: #f5f6f7;
 }
+
 @media screen and (min-width: 800px) {
 
     .whereabout {
@@ -263,8 +411,9 @@
     }
 
     .whereabout-header {
-        height: 118px;
-        padding-top: 58px;
+        height: 60px;
+        /* height: 118px; */
+        /* padding-top: 58px; */
     }
 
     .whereabout-body-scroll-container {
@@ -284,5 +433,5 @@
         transition: background-color .5s;
     }
 
-    
+
 }

@@ -1,43 +1,55 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import "./list-whereabout.css"
 import { UIContext } from "@/context/ui";
 import { fetchGET } from "@/utils/fetcher";
 import { RoutesWhereabout, Whereabout } from "@/interfaces/routes-interface";
-import mapbox from "@/utils/map-wrapper";
-import mapboxgl from "mapbox-gl";
 import { flyToStore } from "@/utils/functions-map";
+import { TEASER_STYLE, cycle } from "@/interfaces/enum/nav-var";
 
-
-const generarColorRandom = () => {
-    const r = Math.floor(Math.random() * 256)
-    const g = Math.floor(Math.random() * 256)
-    const b = Math.floor(Math.random() * 256)
-    return `rgb(${r}, ${g}, ${b})`;
-}
 
 interface Propsitem {
     items: RoutesWhereabout
     color: string
 }
 
+
+
 const Item = ({ items, color }: Propsitem) => {
-    
+    const [teaserIndex, setTeaserIndex] = useState(0);
+
     const handlerClick = (point: Whereabout) => {
         flyToStore(point)
     }
 
+    const handlerTeaserStyle = () => {
+        setTeaserIndex((prevIndex) => (prevIndex + 1) % cycle.length);
+    };
+
+    const teaserClassName = cycle[teaserIndex];
 
     return (
         <>
-            <div className="whereabout">
-                <div className="whereabout-header">
+            <div className={`whereabout ${teaserClassName}`}>
+                <div className={`whereabout-header `}>
                     <div className="whereabout-header--title">
                         <h2 className="whereabout-header--title-text">
                             <span className="whereabout-header--title-text-shortname" style={{ background: color }}>RUTA {items?.route.code}</span>
                             <span className="whereabout-header--title-text-longname">{items?.route.name}</span>
                         </h2>
+                    </div>
+                    <div className="whereabout-button" onClick={() => handlerTeaserStyle()}>
+                        <span className="teaser-label teaser-label--top">desarollar</span>
+                        <button className="teaser-button-size" title="Afficher plus ou moins de détails"></button>
+                        <span className="teaser-label teaser-label--bottom">
+                            {
+                                teaserClassName === TEASER_STYLE.small
+                                    ? "minimizar" :
+                                    teaserClassName === TEASER_STYLE.fullscreen
+                                        ? "reducir" : ""
+                            }
+                        </span>
                     </div>
                 </div>
                 <div className="whereabout-body" style={{ background: color }}>
